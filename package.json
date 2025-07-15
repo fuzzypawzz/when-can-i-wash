@@ -1,0 +1,99 @@
+{
+  "name": "when-can-i-run-my-dishwasher",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "dev:offline": "vite --mode offline",
+    "dev:offline:e2e": "cross-env VITE_E2E_TEST=true vite --mode offline --port 5183",
+    "storybook": "cross-env VITE_STORYBOOK=true storybook dev -p 6006",
+    "build-storybook": "cross-env VITE_STORYBOOK=true storybook build",
+    "build": "vite build",
+    "test": "vitest",
+    "test:nowatch": "vitest run",
+    "e2e": "cross-env playwright test",
+    "e2e:ui": "cross-env playwright test --ui",
+    "e2e:headed": "cross-env playwright test --headed",
+    "preview": "vite preview",
+    "type-check": "tsc --noEmit -p tsconfig.json",
+    "lint": "npm run type-check && npm run eslint && npm run stylelint",
+    "eslint": "cross-env eslint 'src/**/*.{js,ts,jsx,tsx}' --fix --max-warnings=0",
+    "stylelint": "cross-env stylelint 'src/**/*.{css,scss}' --ignore-path .gitignore",
+    "stylelint:fix": "cross-env npm run stylelint -- --fix",
+    "format-check": "prettier --check src/",
+    "format": "prettier --write",
+    "cruise-deps": "depcruise src",
+    "prepare": "husky install"
+  },
+  "lint-staged": {
+    "**/*.{js,ts,jsx,tsx}": [
+      "npm run format",
+      "npm run eslint",
+      "npm run test:nowatch -- --passWithNoTests"
+    ],
+    "**/*.{css,scss,sass}": [
+      "npm run stylelint -- --max-warnings=0"
+    ]
+  },
+  "dependencies": {
+    "include-media": "^2.0.0",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "react-router": "^7.6.3"
+  },
+  "msw": {
+    "workerDirectory": "public"
+  },
+  "devDependencies": {
+    "@chromatic-com/storybook": "^4.0.1",
+    "@eslint/js": "^9.29.0",
+    "@playwright/test": "^1.53.2",
+    "@storybook/addon-a11y": "^9.0.16",
+    "@storybook/addon-docs": "^9.0.16",
+    "@storybook/addon-vitest": "^9.0.16",
+    "@storybook/react-vite": "^9.0.16",
+    "@testing-library/dom": "^10.4.0",
+    "@testing-library/react": "^16.3.0",
+    "@trivago/prettier-plugin-sort-imports": "^5.2.2",
+    "@types/lodash": "^4.17.20",
+    "@types/node": "^24.0.10",
+    "@types/react": "^19.1.8",
+    "@types/react-dom": "^19.1.6",
+    "@typescript-eslint/parser": "^8.36.0",
+    "@vitejs/plugin-react": "^4.5.2",
+    "@vitest/browser": "3.2.4",
+    "@vitest/coverage-v8": "3.2.4",
+    "cross-env": "^7.0.3",
+    "dependency-cruiser": "^16.10.4",
+    "eslint": "^9.29.0",
+    "eslint-config-prettier": "^10.1.5",
+    "eslint-plugin-react-hooks": "^5.2.0",
+    "eslint-plugin-react-refresh": "^0.4.20",
+    "eslint-plugin-storybook": "^9.0.16",
+    "globals": "^16.2.0",
+    "husky": "^9.1.7",
+    "jsdom": "^26.1.0",
+    "lint-staged": "^16.1.2",
+    "msw": "^2.10.3",
+    "playwright": "^1.53.2",
+    "prettier": "^3.6.2",
+    "sass": "^1.89.2",
+    "storybook": "^9.0.16",
+    "stylelint": "^16.21.1",
+    "stylelint-config-prettier-scss": "^1.0.0",
+    "stylelint-config-standard": "^38.0.0",
+    "stylelint-config-standard-scss": "^15.0.1",
+    "stylelint-order": "^7.0.0",
+    "typescript": "~5.8.3",
+    "typescript-eslint": "^8.34.1",
+    "vite": "^7.0.0",
+    "vitest": "^3.2.4"
+  },
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "volta": {
+    "node": "22.12.0"
+  }
+}
