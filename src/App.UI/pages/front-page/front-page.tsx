@@ -1,4 +1,6 @@
+import SlBadge from '@shoelace-style/shoelace/dist/react/badge/index.js'
 import SlCard from '@shoelace-style/shoelace/dist/react/card/index.js'
+import SlDivider from '@shoelace-style/shoelace/dist/react/divider/index.js'
 import SlIcon from '@shoelace-style/shoelace/dist/react/icon/index.js'
 import '@shoelace-style/shoelace/dist/themes/light.css'
 import { setBasePath } from '@shoelace-style/shoelace/dist/utilities/base-path.js'
@@ -17,16 +19,27 @@ export const FrontPage = withPresenter(function FrontPage(presenter) {
     <div className="front-page">
       <SlCard className="front-page__card">
         <div className="front-page__content">
-          <SlIcon name="grid-3x3-gap" className="front-page__icon" />
+          <SlIcon name="lightning-charge" className="front-page__icon" />
 
           <h1 className="front-page__title">{vm.optimalTimeText}</h1>
 
-          <div className="front-page__time-range">{vm.timeRange}</div>
+          <SlDivider />
 
-          <div className="front-page__price-label">Average price</div>
+          <div className="front-page__cards">
+            <SlCard>
+              <div className="front-page__time-range">{vm.timeRange}</div>
+              <div>Den billigste tidsramme</div>
+            </SlCard>
 
-          <div className="front-page__price-value">
-            {vm.averagePrice} {vm.priceUnit}
+            <SlCard>
+              <div className="front-page__average-price">Gennemsnitlig kwh pris</div>
+              <SlBadge variant="success" className="front-page__average-price-badge">
+                {vm.badgeText}
+              </SlBadge>
+              <div>
+                {vm.averagePrice} {vm.priceUnit}
+              </div>
+            </SlCard>
           </div>
         </div>
       </SlCard>

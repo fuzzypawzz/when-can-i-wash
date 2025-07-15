@@ -1,56 +1,60 @@
 .front-page {
   align-items: center;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
   display: flex;
+  font-family: var(--sl-font-sans);
+  height: 100vh;
   justify-content: center;
-  min-height: 100vh;
-  padding: 20px;
 
   &__card {
-    backdrop-filter: blur(10px);
-    background: rgb(255 255 255 / 95%);
-    border-radius: 16px;
-    box-shadow: 0 8px 32px rgb(0 0 0 / 10%);
-    max-width: 400px;
-    width: 100%;
+    max-width: 500px;
   }
 
   &__content {
-    padding: 24px;
     text-align: center;
   }
 
   &__icon {
-    color: #667eea;
-    font-size: 48px;
-    margin-bottom: 16px;
+    color: #027BF5;
+    font-size: 32px;
   }
 
   &__title {
-    color: #2d3748;
-    font-size: 24px;
+    color: #2c3e50;
+    font-size: 22px;
     font-weight: 600;
-    line-height: 1.2;
-    margin-bottom: 8px;
+    line-height: 1.3;
+    margin-bottom: 12px;
+    margin-top: 12px;
+  }
+
+  &__cards {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
   }
 
   &__time-range {
-    color: #667eea;
-    font-family: monospace;
-    font-size: 36px;
+    color: #027BF5;
+    font-size: 20px;
     font-weight: 700;
-    margin-bottom: 16px;
-  }
-
-  &__price-label {
-    color: #4a5568;
-    font-size: 18px;
+    letter-spacing: -0.5px;
     margin-bottom: 8px;
   }
 
-  &__price-value {
-    color: #2d3748;
-    font-size: 24px;
-    font-weight: 600;
+  &__average-price {
+    color: #17A34A;
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    margin-bottom: 8px;
+
+    &-badge {
+      margin-bottom: 8px;
+    }
+  }
+
+  @media (width <= 480px) {
+    padding: 0 16px;
   }
 }
