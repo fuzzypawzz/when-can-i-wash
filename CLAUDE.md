@@ -100,6 +100,10 @@ Requires Node.js >= 22.12.0 (managed via Volta).
 
 Always run `npm run lint` after making changes to ensure code quality and type safety.
 
+## UI Testing with Playwright MCP
+
+When asked to verify UI with Playwright MCP, ALWAYS first check if the development server is already running on port 5173 by using `curl` or similar method to test the connection. If the server is not running, inform the user that the development server needs to be started first with `npm run dev:offline` (preferred) or `npm run dev`. Do NOT attempt to start the server yourself as this often fails - let the user start it manually.
+
 ## Architecture Principles
 
 ### Flat Presentation - "Tell Don't Ask"
