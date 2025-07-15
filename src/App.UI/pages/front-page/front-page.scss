@@ -2,11 +2,15 @@
   align-items: center;
   background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
   display: flex;
+  flex-direction: column;
   font-family: var(--sl-font-sans);
+  gap: space(8);
   height: 100vh;
   justify-content: center;
 
   &__card {
+    --border-radius: 8px;
+
     max-width: 500px;
   }
 

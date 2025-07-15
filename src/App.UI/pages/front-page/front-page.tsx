@@ -26,12 +26,12 @@ export const FrontPage = withPresenter(function FrontPage(presenter) {
           <SlDivider />
 
           <div className="front-page__cards">
-            <SlCard>
+            <SlCard className="front-page__card">
               <div className="front-page__time-range">{vm.timeRange}</div>
               <div>Den billigste tidsramme</div>
             </SlCard>
 
-            <SlCard>
+            <SlCard className="front-page__card">
               <div className="front-page__average-price">Gennemsnitlig kwh pris</div>
               <SlBadge variant="success" className="front-page__average-price-badge">
                 {vm.badgeText}
@@ -43,6 +43,15 @@ export const FrontPage = withPresenter(function FrontPage(presenter) {
           </div>
         </div>
       </SlCard>
+
+      <a target="_blank" href="https://www.elprisenligenu.dk">
+        <img
+          src="https://i.bnfcl.io/hva-koster-strommen/elpriser-leveret-af-elprisenligenu_LJNbbujZAX.png"
+          alt="Elpriser leveret af Elprisen lige nu.dk"
+          width="200"
+          height="45"
+        />
+      </a>
     </div>
   )
 }, useFrontPagePresenter)
