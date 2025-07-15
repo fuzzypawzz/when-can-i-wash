@@ -1,0 +1,42 @@
+@use 'sass:math';
+@use 'sass:list';
+
+$base-unit: 4px;
+
+@function space($values...) {
+  @if list.length($values) > 4 {
+    @error "space calculator: A maximum of 4 parameters is allowed";
+  }
+
+  $accumulator: ();
+  @each $value in $values {
+    @if math.round($value) != $value {
+      @error "space calculator: arguments must be whole numbers";
+    }
+
+    $accumulator: list.append($accumulator, $base-unit * $value);
+  }
+  @return $accumulator;
+}
+
+$column-gap-small: space(4);
+$column-gap-large: space(6);
+$row-gap: 0;
+
+@mixin grid-container() {
+  display: grid;
+  position: relative;
+  z-index: 0;
+  @include media('<=small') {
+    gap: $row-gap $column-gap-small;
+    grid-template-columns: repeat(4, 1fr);
+  }
+  @include media('>small', '<=medium') {
+    gap: $row-gap $column-gap-large;
+    grid-template-columns: repeat(8, 1fr);
+  }
+  @include media('>medium') {
+    gap: $row-gap $column-gap-large;
+    grid-template-columns: repeat(12, 1fr);
+  }
+}
