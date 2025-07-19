@@ -10,7 +10,9 @@ vi.mock('@/App.Core/infrastructure/mock-service-worker/msw-browser', async () =>
 })
 
 beforeEach(() => {
-  bootstrap({ withRender: false })
+  setTimeout(() => {
+    bootstrap({ withRender: false })
+  }, 0)
 })
 
 beforeAll(() => {
