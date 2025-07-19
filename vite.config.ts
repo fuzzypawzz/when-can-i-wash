@@ -8,6 +8,7 @@ export default defineConfig({
   test: {
     environment: 'jsdom',
     globals: true,
+    restoreMocks: true,
     setupFiles: ['./src/App.Core/infrastructure/testing/test-setup.ts'],
     exclude: ['./src/Atlas.E2E', '**/node_modules/**', '**/dist/**', '**/*.spec.ts'],
     onConsoleLog(log) {
