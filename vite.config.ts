@@ -9,7 +9,12 @@ export default defineConfig({
     environment: 'jsdom',
     globals: true,
     setupFiles: ['./src/App.Core/infrastructure/testing/test-setup.ts'],
-    exclude: ['./src/Atlas.E2E', '**/node_modules/**', '**/dist/**', '**/*.spec.ts']
+    exclude: ['./src/Atlas.E2E', '**/node_modules/**', '**/dist/**', '**/*.spec.ts'],
+    onConsoleLog(log) {
+      if (log.includes('Lit is in dev mode')) return false
+
+      return true
+    }
   },
   resolve: {
     alias: {
