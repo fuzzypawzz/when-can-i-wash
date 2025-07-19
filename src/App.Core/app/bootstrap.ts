@@ -8,7 +8,7 @@ export function bootstrap(args = { withRender: true }) {
     .then((appSetup) => (args.withRender ? appSetup.renderApp() : appSetup))
     .then((appSetup) => appSetup.sendAppStartEvent())
     .catch((error) => {
-      if (appMode.isTest) return
+      if (appMode.isTest) return console.error(error)
       if (!appMode.isProduction) console.error(error)
 
       AppSetup.renderErrorView(error)
