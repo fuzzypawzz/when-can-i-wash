@@ -60,17 +60,11 @@ function findCheapestTimeframe(prices: PriceEntry[]): CheapestTimeframe {
     timeZone: 'Europe/Copenhagen'
   })
 
-  const fromCheapestToMostExpensive = (a: number, b: number) => a - b
-
-  const allPrices = prices.map((price) => price.DKK_per_kWh).sort(fromCheapestToMostExpensive)
-  const medianPrice = allPrices[Math.floor(allPrices.length / 2)]
-  const firstQuartile = allPrices[Math.floor(allPrices.length * 0.25)]
-
   let priceLevel: 'Cheap' | 'Medium' | 'Expensive'
 
-  if (cheapestAverage <= firstQuartile) {
+  if (cheapestAverage < 0.6) {
     priceLevel = 'Cheap'
-  } else if (cheapestAverage <= medianPrice) {
+  } else if (cheapestAverage <= 0.9) {
     priceLevel = 'Medium'
   } else {
     priceLevel = 'Expensive'
