@@ -7,8 +7,17 @@ import type { PriceEntry } from '@/App.Service/models/prices/price-entry'
  */
 export async function service_v1_prices(args: {
   year: number
-  month: number
-  dayOfMonth: number
+  /**
+   * 01 = January
+   * 07 = July
+   */
+  month: string
+
+  /**
+   * 03 = Third day of the month
+   * 14 = 14th day of the month
+   */
+  dayOfMonth: string
   /**
    * DK1 = Aarhus / Vest for Storebælt
    * DK2 = København / Øst for Storebælt

@@ -7,23 +7,17 @@ import PriceJsonResponseStub from '@/App.Service/stubs/prices/price-json-stubs'
 export function getPriceServiceRequestHandlers() {
   return {
     getPrices: {
-      happyScenario: http.get(
-        environmentVariables.value.backendApiUrl + '/2025/07-15_DK2.json',
-        async () => {
-          await defaultDelay()
+      happyScenario: http.get(environmentVariables.value.backendApiUrl, async () => {
+        await defaultDelay()
 
-          return HttpResponse.json(PriceJsonResponseStub)
-        }
-      ),
+        return HttpResponse.json(PriceJsonResponseStub)
+      }),
 
-      networkError: http.get(
-        environmentVariables.value.backendApiUrl + '/2025/07-15_DK2.json',
-        async () => {
-          await defaultDelay()
+      networkError: http.get(environmentVariables.value.backendApiUrl, async () => {
+        await defaultDelay()
 
-          return HttpResponse.error()
-        }
-      )
+        return HttpResponse.error()
+      })
     }
   }
 }

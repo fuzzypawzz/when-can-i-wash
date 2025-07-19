@@ -1,3 +1,5 @@
 export type ElectricityPriceDto = {
-  prop: string
+  bestTimeRangeToStart: string
+  averagePriceInTimeRange: string
+  priceLevel: 'Cheap' | 'Medium' | 'Expensive'
 }

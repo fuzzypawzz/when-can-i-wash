@@ -33,7 +33,7 @@ export const FrontPage = withPresenter(function FrontPage(presenter) {
 
             <SlCard className="front-page__card">
               <div className="front-page__average-price">Gennemsnitlig kwh pris</div>
-              <SlBadge variant="success" className="front-page__average-price-badge">
+              <SlBadge variant={vm.badgeVariant} className="front-page__average-price-badge">
                 {vm.badgeText}
               </SlBadge>
               <div>
