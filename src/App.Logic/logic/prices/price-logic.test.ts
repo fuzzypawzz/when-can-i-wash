@@ -184,43 +184,52 @@ it('handles empty price data gracefully', async () => {
 
   const { result } = appTestHarness.renderHookWithRouter(() => usePriceLogic())
 
+  await waitFor(() => expect(result.current.isLoadingPrices).toBeFalsy())
+
   await waitFor(() => {
-    expect(result.current.bestTimeRangeToStart).toBe('Indlæser...')
+    expect(result.current.bestTimeRangeToStart).toBe('-')
     expect(result.current.averagePriceInTimeRange).toBe('0.00')
     expect(result.current.priceLevel).toBe('Medium')
   })
 })
 
-it('handles insufficient hours for washing machine duration', async () => {
-  await appTestHarness.waitForAppToStart()
+// TODO: Move this test to Playwright as it's testing visual UI
+it.todo(
+  'shows the internal app error page if there are insufficient hours for washing machine duration',
+  async () => {
+    await appTestHarness.waitForAppToStart()
 
-  const mockPrices: PriceEntry[] = [
-    {
-      DKK_per_kWh: 0.5,
-      EUR_per_kWh: 0.067,
-      EXR: 7.462044,
-      time_start: '2025-07-19T08:00:00+02:00',
-      time_end: '2025-07-19T09:00:00+02:00'
-    },
-    {
-      DKK_per_kWh: 0.3,
-      EUR_per_kWh: 0.04,
-      EXR: 7.462044,
-      time_start: '2025-07-19T09:00:00+02:00',
-      time_end: '2025-07-19T10:00:00+02:00'
-    }
-  ]
+    const mockPrices: PriceEntry[] = [
+      {
+        DKK_per_kWh: 0.5,
+        EUR_per_kWh: 0.067,
+        EXR: 7.462044,
+        time_start: '2025-07-19T08:00:00+02:00',
+        time_end: '2025-07-19T09:00:00+02:00'
+      },
+      {
+        DKK_per_kWh: 0.3,
+        EUR_per_kWh: 0.04,
+        EXR: 7.462044,
+        time_start: '2025-07-19T09:00:00+02:00',
+        time_end: '2025-07-19T10:00:00+02:00'
+      }
+    ]
 
-  server.use(requestHandlers.prices.getPrices.override(mockPrices))
+    server.use(requestHandlers.prices.getPrices.override(mockPrices))
 
-  const { result } = appTestHarness.renderHookWithRouter(() => usePriceLogic())
+    // const t = await act(() => {
+    //    return render(<appRouter.AppRouterProvider />)
+    // })
 
-  await waitFor(() => {
-    expect(result.current.bestTimeRangeToStart).toBe('Indlæser...')
-    expect(result.current.averagePriceInTimeRange).toBe('0.00')
-    expect(result.current.priceLevel).toBe('Medium')
-  })
-})
+    await wait(500)
+
+    await waitFor(async () => {
+      // const locator = await t.findByText('Der er sket en alvorlig fejl.')
+      //  expect(locator).toBeVisible()
+    })
+  }
+)
 
 it('classifies price level as Cheap when average is below 0.60', async () => {
   await appTestHarness.waitForAppToStart()

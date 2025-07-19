@@ -19,7 +19,13 @@ export function onUnhandledRequest(
     return paths.some((path) => request.url.includes(path))
   }
 
-  const localDevelopmentAssetPaths = ['src/App', 'node_modules', 'chrome-extension']
+  const localDevelopmentAssetPaths = [
+    'src/App',
+    'node_modules',
+    'chrome-extension',
+    '@shoelace',
+    'hva-koster-strommen'
+  ]
 
   const storybookFilePaths = [
     '.storybook',
