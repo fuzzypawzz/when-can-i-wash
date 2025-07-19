@@ -5,10 +5,10 @@ export type RequestHandlers = {
 }
 
 export const requestHandlers = {
-  user: getPriceServiceRequestHandlers()
+  prices: getPriceServiceRequestHandlers()
 }
 
 /**
  * @description The default handlers used for msw-browser and msw-server.
  */
-export const defaultRequestHandlers = [...[requestHandlers.user.getPrices.happyScenario]]
+export const defaultRequestHandlers = [...[requestHandlers.prices.getPrices.happyScenario]]
