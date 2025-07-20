@@ -142,11 +142,7 @@ export const storybook = (function () {
       return currentState.value === 'READY'
     },
 
-    controlAppRouter(
-      callback: (
-        appRouterControls: ReturnType<typeof appRouter.useNavigation>
-      ) => void | Promise<void>
-    ) {
+    controlAppRouter(callback: (appRouterControls: typeof appRouter) => void | Promise<void>) {
       const event = new CustomEvent('external-navigation-event', {
         detail: { callback }
       })

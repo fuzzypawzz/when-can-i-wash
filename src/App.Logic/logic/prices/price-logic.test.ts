@@ -4,6 +4,7 @@ import { expect, it } from 'vitest'
 import { createHttpGatewaySpy } from '@/App.Core/infrastructure/http-gateway/http-gateway-spy'
 import { server } from '@/App.Core/infrastructure/mock-service-worker/msw-node-server'
 import { requestHandlers } from '@/App.Core/infrastructure/mock-service-worker/request-handlers'
+import { appRouter } from '@/App.Core/infrastructure/router/app-router'
 import { appTestHarness } from '@/App.Core/infrastructure/testing/app-test-harness'
 import { usePriceLogic } from '@/App.Logic/logic/prices/price-logic'
 import type { PriceEntry } from '@/App.Service/models/prices/price-entry'
@@ -184,8 +185,6 @@ it('handles empty price data gracefully', async () => {
 
   const { result } = appTestHarness.renderHookWithRouter(() => usePriceLogic())
 
-  await waitFor(() => expect(result.current.isLoadingPrices).toBeFalsy())
-
   await waitFor(() => {
     expect(result.current.bestTimeRangeToStart).toBe('-')
     expect(result.current.averagePriceInTimeRange).toBe('0.00')
@@ -193,43 +192,36 @@ it('handles empty price data gracefully', async () => {
   })
 })
 
-// TODO: Move this test to Playwright as it's testing visual UI
-it.todo(
-  'shows the internal app error page if there are insufficient hours for washing machine duration',
-  async () => {
-    await appTestHarness.waitForAppToStart()
+it('shows the internal app error page if there are insufficient hours for washing machine duration', async () => {
+  await appTestHarness.waitForAppToStart()
 
-    const mockPrices: PriceEntry[] = [
-      {
-        DKK_per_kWh: 0.5,
-        EUR_per_kWh: 0.067,
-        EXR: 7.462044,
-        time_start: '2025-07-19T08:00:00+02:00',
-        time_end: '2025-07-19T09:00:00+02:00'
-      },
-      {
-        DKK_per_kWh: 0.3,
-        EUR_per_kWh: 0.04,
-        EXR: 7.462044,
-        time_start: '2025-07-19T09:00:00+02:00',
-        time_end: '2025-07-19T10:00:00+02:00'
-      }
-    ]
+  expect(appRouter.currentPathName).toBe('/')
 
-    server.use(requestHandlers.prices.getPrices.override(mockPrices))
+  const mockPrices: PriceEntry[] = [
+    {
+      DKK_per_kWh: 0.5,
+      EUR_per_kWh: 0.067,
+      EXR: 7.462044,
+      time_start: '2025-07-19T08:00:00+02:00',
+      time_end: '2025-07-19T09:00:00+02:00'
+    },
+    {
+      DKK_per_kWh: 0.3,
+      EUR_per_kWh: 0.04,
+      EXR: 7.462044,
+      time_start: '2025-07-19T09:00:00+02:00',
+      time_end: '2025-07-19T10:00:00+02:00'
+    }
+  ]
 
-    // const t = await act(() => {
-    //    return render(<appRouter.AppRouterProvider />)
-    // })
+  server.use(requestHandlers.prices.getPrices.override(mockPrices))
 
-    await wait(500)
+  appTestHarness.renderHookWithRouter(() => usePriceLogic())
 
-    await waitFor(async () => {
-      // const locator = await t.findByText('Der er sket en alvorlig fejl.')
-      //  expect(locator).toBeVisible()
-    })
-  }
-)
+  await waitFor(() => {
+    expect(appRouter.currentPathName).toBe('/fejl')
+  })
+})
 
 it('classifies price level as Cheap when average is below 0.60', async () => {
   await appTestHarness.waitForAppToStart()

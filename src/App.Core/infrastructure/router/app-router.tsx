@@ -1,11 +1,5 @@
 import { useEffect } from 'react'
-import {
-  Outlet,
-  RouterProvider,
-  createBrowserRouter,
-  createMemoryRouter,
-  useNavigate
-} from 'react-router'
+import { Outlet, RouterProvider, createBrowserRouter, createMemoryRouter } from 'react-router'
 
 import { appMode } from '@/App.Core/infrastructure/app-mode'
 import { appEventHub } from '@/App.Core/infrastructure/helpers/event-hub'
@@ -35,26 +29,28 @@ export const appRouter = (function () {
     createRouterInstance,
     Outlet,
 
-    useNavigation() {
-      const navigate = useNavigate()
+    get currentPathName() {
+      return router.state.location.pathname
+    },
 
+    get goToPage() {
       return {
-        goToPage: {
-          root: () => {
-            return navigate('/')
-          }
-        },
-
-        goToErrorPage: {
-          internalAppError: () => {
-            return navigate('/fejl')
-          }
-        },
-
-        goToRawPath(path: string, options = { replace: false }) {
-          return navigate(path, options)
+        root: () => {
+          return router.navigate('/')
         }
       }
+    },
+
+    get goToErrorPage() {
+      return {
+        internalAppError: () => {
+          return router.navigate('/fejl')
+        }
+      }
+    },
+
+    goToRawPath(path: string, options = { replace: false }) {
+      return router.navigate(path, options)
     }
   }
 })()

@@ -18,10 +18,7 @@ export const usePriceLogic = (function () {
   const WASHING_MACHINE_DURATION_HOURS = 2.5
 
   return function usePriceLogic(): ElectricityPriceDto {
-    const [prices, setPrices] = useState<PriceEntry[]>([])
-    const [isLoading, setIsLoading] = useState(true)
-
-    const navigation = appRouter.useNavigation()
+    const [dto, setDto] = useState<ElectricityPriceDto>({} as ElectricityPriceDto)
 
     useOnMount(() => {
       service_v1_prices({
@@ -30,28 +27,30 @@ export const usePriceLogic = (function () {
         dayOfMonth: '19',
         priceClass: priceClassDict['Copenhagen/East']
       })
-        .then(setPrices)
+        .then((prices) => {
+          const cheapestTimeframe = findCheapestTimeframe(prices)
+
+          const bestTimeRangeToStart =
+            `${cheapestTimeframe?.startTime || ''} - ${cheapestTimeframe?.endTime || ''}`.trim()
+
+          const averagePriceInTimeRange =
+            cheapestTimeframe?.averagePrice > 0
+              ? cheapestTimeframe?.averagePrice.toFixed(2)
+              : '0.00'
+
+          setDto({
+            bestTimeRangeToStart,
+            averagePriceInTimeRange,
+            priceLevel: cheapestTimeframe?.priceLevel
+          })
+        })
         .catch((error) => {
           console.error(error)
-          navigation.goToErrorPage.internalAppError()
+          appRouter.goToErrorPage.internalAppError()
         })
-        .finally(() => setIsLoading(false))
     })
 
-    const cheapestTimeframe = findCheapestTimeframe(prices)
-
-    const bestTimeRangeToStart =
-      `${cheapestTimeframe.startTime || ''} - ${cheapestTimeframe.endTime || ''}`.trim()
-
-    const averagePriceInTimeRange =
-      cheapestTimeframe.averagePrice > 0 ? cheapestTimeframe.averagePrice.toFixed(2) : '0.00'
-
-    return {
-      isLoadingPrices: isLoading,
-      bestTimeRangeToStart,
-      averagePriceInTimeRange,
-      priceLevel: cheapestTimeframe.priceLevel
-    }
+    return dto
   }
 
   function findCheapestTimeframe(prices: PriceEntry[]): CheapestTimeframe {
