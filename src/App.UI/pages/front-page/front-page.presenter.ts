@@ -11,19 +11,19 @@ export function useFrontPagePresenter() {
     Cheap: 'Billigt',
     Medium: 'Mellemdyrt',
     Expensive: 'Dyrt'
-  }[dto.priceLevel]
+  }[dto?.priceLevel || 'Cheap']
 
   const badgeVariant: BadgeVariant = {
     Cheap: 'success' as const,
     Medium: 'warning' as const,
     Expensive: 'danger' as const
-  }[dto.priceLevel]
+  }[dto?.priceLevel || 'Cheap']
 
   return {
     viewModel: {
       optimalTimeText: 'Det bedste tidspunkt at starte din vaskemaskine er',
-      timeRange: dto.bestTimeRangeToStart,
-      averagePrice: dto.averagePriceInTimeRange,
+      timeRange: dto?.bestTimeRangeToStart || '',
+      averagePrice: dto?.averagePriceInTimeRange || '',
       priceUnit: 'kr. per kWh',
       dishwasherIcon: 'dish-washer',
       badgeText: badgeText,

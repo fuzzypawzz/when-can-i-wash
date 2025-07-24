@@ -38,6 +38,7 @@
   },
   "dependencies": {
     "@shoelace-style/shoelace": "^2.20.1",
+    "@tanstack/query-core": "^5.83.0",
     "include-media": "^2.0.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
