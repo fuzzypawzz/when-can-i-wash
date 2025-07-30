@@ -21,7 +21,7 @@ export function useFrontPagePresenter() {
 
   return {
     viewModel: {
-      optimalTimeText: 'Det bedste tidspunkt at starte din vaskemaskine er',
+      optimalTimeText: 'Det bedste tidspunkt (i dag) at starte din vaskemaskine er',
       timeRange: dto?.bestTimeRangeToStart || '',
       averagePrice: dto?.averagePriceInTimeRange || '',
       priceUnit: 'kr. per kWh',
