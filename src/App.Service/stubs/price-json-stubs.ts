@@ -1,6 +1,6 @@
-import type { PriceEntry } from '@/App.Service/models/prices/price-entry'
+import type { PriceEntry } from '@/App.Service/models/price-entry.ts'
 
-export default [
+export const priceStubs = [
   {
     DKK_per_kWh: 0.79172,
     EUR_per_kWh: 0.1061,

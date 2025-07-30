@@ -1,4 +1,4 @@
-import type { PriceEntry } from '@/App.Service/models/prices/price-entry'
+import type { PriceEntry } from '@/App.Service/models/price-entry.ts'
 
 type CheapestTimeframe = {
   bestTimeRangeToStart: string

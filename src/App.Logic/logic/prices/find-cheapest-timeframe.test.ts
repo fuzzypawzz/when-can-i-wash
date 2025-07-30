@@ -1,7 +1,7 @@
 import { expect, it } from 'vitest'
 
 import { findCheapestTimeframe } from '@/App.Logic/logic/prices/find-cheapest-timeframe'
-import type { PriceEntry } from '@/App.Service/models/prices/price-entry'
+import type { PriceEntry } from '@/App.Service/models/price-entry.ts'
 
 it('calculates the best time frame to run the washing machine with simple decreasing prices', async () => {
   const mockPrices: PriceEntry[] = [

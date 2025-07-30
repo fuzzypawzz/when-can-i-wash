@@ -1,5 +1,5 @@
 import { httpGateway } from '@/App.Core/infrastructure/http-gateway/http-gateway'
-import type { PriceEntry } from '@/App.Service/models/prices/price-entry'
+import type { PriceEntry } from '@/App.Service/models/price-entry.ts'
 
 /**
  * Gets the electricity prices as JSON.

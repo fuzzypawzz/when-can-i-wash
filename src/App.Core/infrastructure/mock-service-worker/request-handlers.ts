@@ -1,4 +1,4 @@
-import { getPriceServiceRequestHandlers } from '@/App.Service/service/user/msw-request-handlers/price-service-request-handlers'
+import { getPriceServiceRequestHandlers } from '@/App.Service/service/msw-request-handlers/price-service-request-handlers.ts'
 
 export type RequestHandlers = {
   [key in keyof typeof requestHandlers]: (typeof requestHandlers)[key]

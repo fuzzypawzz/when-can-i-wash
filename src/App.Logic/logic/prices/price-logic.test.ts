@@ -8,7 +8,7 @@ import { appRouter } from '@/App.Core/infrastructure/router/app-router'
 import { appTestHarness } from '@/App.Core/infrastructure/testing/app-test-harness'
 import type { findCheapestTimeframe } from '@/App.Logic/logic/prices/find-cheapest-timeframe'
 import { usePriceLogic } from '@/App.Logic/logic/prices/price-logic'
-import type { PriceEntry } from '@/App.Service/models/prices/price-entry'
+import type { PriceEntry } from '@/App.Service/models/price-entry.ts'
 
 const httpGateway = createHttpGatewaySpy()
 
