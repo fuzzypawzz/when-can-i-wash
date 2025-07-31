@@ -7,5 +7,5 @@ test('renders the app', async ({ page }) => {
 
   await app.goTo('/')
 
-  await expect(page.getByText('Det bedste tidspunkt at starte din vaskemaskine er')).toBeVisible()
+  await expect(page.getByText('Det bedste tidspunkt (i dag) at starte din vaskemaskine er')).toBeVisible()
 })
